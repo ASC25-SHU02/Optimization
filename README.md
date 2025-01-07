@@ -1,5 +1,27 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11046885.svg)](https://doi.org/10.5281/zenodo.11046885)
 
+# KEY POINTS
+1. Building indexes is NOT included in elpsed time.
+2. Call for software packaging.
+
+# BUILDING
+1. download [HISAT-3N](http://daehwankimlab.github.io/hisat2/hisat-3n/), Ver latest
+2. download [SRA-Toolkits](https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit), Ver3.1.1
+3. download [poly dataset](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM7051146), change the URL with 46/47/48
+    - download with https: `prefetch [SSR]`
+    - convert sra to fasta: `fastq-dump --fasta [SRR]`
+4. download [samtools](https://github.com/samtools/samtools/blob/develop/INSTALL) Ver1.21
+    - have TINY demand for dependency: `sudo apt-get install autoconf automake make gcc perl zlib1g-dev libbz2-dev liblzma-dev libcurl4-gnutls-dev libssl-dev libncurses5-dev libdeflate-dev`
+    - my configuration command: `./configure CC=mpicc`
+    - make and make install with `-j $(nproc)`
+    > may ADD a `--prefix` to avoid super user privildge.
+5. Do accordingly to the handout(tips below)
+    - `.fa` in handout is the `.fastq` on this machine
+    - `samtools faidx SRR23538290.fasta` get a fai file
+6. download [cutseq](https://github.com/y9c/cutseq)
+> Others encapsulate in a script... See `./script`
+
+
 # m<sup>5</sup>C-UBSseq
 
 ## Changelog
