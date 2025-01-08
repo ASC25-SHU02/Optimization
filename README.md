@@ -20,7 +20,8 @@
     - `.fa` in handout is the `.fasta` on this machine
     - `samtools faidx SRR23538290.fasta` get a fai file
 6. download [cutseq](https://github.com/y9c/cutseq)
-> Others encapsulate in a script... See `./script`
+> [!IMPORTANT]
+> Others encapsulated in a script... See `./script`
 
 
 # m<sup>5</sup>C-UBSseq
