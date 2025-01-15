@@ -20,6 +20,8 @@
     - `.fa` in handout is the `.fasta` on this machine
     - `samtools faidx SRR23538290.fasta` get a fai file
 6. download [cutseq](https://github.com/y9c/cutseq)
+7. download Java(Ver 11), and configure `umicollapse.jar` according to the [repo](https://github.com/Daniel-Liu-c0deb0t/UMICollapse/tree/master)
+
 > [!IMPORTANT]
 > Others encapsulated in a script... See `./script`
 
