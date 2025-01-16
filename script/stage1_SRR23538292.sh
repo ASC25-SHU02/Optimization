@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cutseq ../process/SRR23538292/SRR23538292.fasta \
+cutseq ../process/SRR23538292/SRR23538292.fastq \
         -t 20 \
         -A INLINE \
         -m 20 \

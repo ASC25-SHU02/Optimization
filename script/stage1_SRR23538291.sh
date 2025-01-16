@@ -1,14 +1,6 @@
 #!/bin/bash
 
-cutseq ../process/SRR23538291/SRR23538291.fasta \
-        -t 20 \
-        -A INLINE \
-        -m 20 \
-        --trim-polyA \
-        --ensure-inline-barcode\
-        -o ../process/SRR23538291/SRR23538291.fastq_cut \
-        -s ../process/SRR23538291/SRR23538291.fastq_tooshort \
-        -u ../process/SRR23538291/SRR23538291.fastq_untrimmed
+
 
 hisat-3n --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa \
     --summary-file ../process/SRR23538291/map2ncrna.output.summary \
@@ -27,11 +19,14 @@ hisat-3n --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa \
     -U ../process/SRR23538291/SRR23538291.ncrna.unmapped.bam \
     -o ../process/SRR23538291/SRR23538291.ncrna.mapped.bam
 
+echo "FINISH HISAT-3N. Get: ncrna.mapped.bam"
 
 samtools fastq \
 	-@ 16 \
 	-O ../process/SRR23538291/SRR23538291.ncrna.unmapped.bam \
 	> ../process/SRR23538291/SRR23538291.mRNA.fastq
+
+echo "FINISH SAMTOOL. Get: mRNA.fastq"
 
 hisat-3n \
 	--index ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
@@ -51,7 +46,7 @@ hisat-3n \
 	-U ../process/SRR23538291/SRR23538291.mRNA.genome.unmapped.bam \
 	-o ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.bam
 
-echo "FINISH ALL HISAT-3N & SAMTOOL VIEW. GET: mapped.bam"
+echo "FINISH ALL HISAT-3N & SAMTOOL VIEW. GET: genome.mapped.bam"
 
 samtools sort -@ 16 \
 	--write-index \
@@ -117,6 +112,6 @@ echo "FINISH SAMTOOL rlen<100000. Get: filtered_uniq.tsv.gz"
 samtools view -e "rlen<100000" -h ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.filtered.bam | hisat-3n-table -p 16 -m --alignments - --ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa --output-name /dev/stdout --base-change C,T | cut -f 1,2,3,5,7 | gzip -c > ../process/SRR23538291/SRR23538291_filtered_multi.tsv.gz
 
 echo "FINISH SAMTOOL rlen<100000. Get: filtered_multi.tsv.gz"
-python bin/join_pileup.py -i ../process/SRR23538291/SRR23538291_unfiltered_uniq.tsv.gz ../process/SRR23538291/SRR23538291_unfiltered_multi.tsv.gz ../process/SRR23538291/SRR23538291_filtered_uniq.tsv.gz ../process/SRR23538291/SRR23538291_filtered_multi.tsv.gz -o ../process/SRR23538291/SRR23538291_genome.arrow
+# python bin/join_pileup.py -i ../process/SRR23538291/SRR23538291_unfiltered_uniq.tsv.gz ../process/SRR23538291/SRR23538291_unfiltered_multi.tsv.gz ../process/SRR23538291/SRR23538291_filtered_uniq.tsv.gz ../process/SRR23538291/SRR23538291_filtered_multi.tsv.gz -o ../process/SRR23538291/SRR23538291_genome.arrow
 
 echo "FINISH PYTHON. Get: genome.arrow"
