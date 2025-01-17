@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Comment this command when running vtune, run it separately before the workflow
+cutseq ../process/SRR23538291/SRR23538291.fastq \
+        -t 20 \
+        -A INLINE \
+        -m 20 \
+        --trim-polyA \
+        --ensure-inline-barcode\
+        -o ../process/SRR23538291/SRR23538291.fastq_cut \
+        -s ../process/SRR23538291/SRR23538291.fastq_tooshort \
+        -u ../process/SRR23538291/SRR23538291.fastq_untrimmed
 
 
 hisat-3n --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa \
@@ -112,6 +122,8 @@ echo "FINISH SAMTOOL rlen<100000. Get: filtered_uniq.tsv.gz"
 samtools view -e "rlen<100000" -h ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.filtered.bam | hisat-3n-table -p 16 -m --alignments - --ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa --output-name /dev/stdout --base-change C,T | cut -f 1,2,3,5,7 | gzip -c > ../process/SRR23538291/SRR23538291_filtered_multi.tsv.gz
 
 echo "FINISH SAMTOOL rlen<100000. Get: filtered_multi.tsv.gz"
-# python bin/join_pileup.py -i ../process/SRR23538291/SRR23538291_unfiltered_uniq.tsv.gz ../process/SRR23538291/SRR23538291_unfiltered_multi.tsv.gz ../process/SRR23538291/SRR23538291_filtered_uniq.tsv.gz ../process/SRR23538291/SRR23538291_filtered_multi.tsv.gz -o ../process/SRR23538291/SRR23538291_genome.arrow
+
+# You should also comment this command when vtune, and run it after finishing analysing the work
+python bin/join_pileup.py -i ../process/SRR23538291/SRR23538291_unfiltered_uniq.tsv.gz ../process/SRR23538291/SRR23538291_unfiltered_multi.tsv.gz ../process/SRR23538291/SRR23538291_filtered_uniq.tsv.gz ../process/SRR23538291/SRR23538291_filtered_multi.tsv.gz -o ../process/SRR23538291/SRR23538291_genome.arrow
 
 echo "FINISH PYTHON. Get: genome.arrow"
