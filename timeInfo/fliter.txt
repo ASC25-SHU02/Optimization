@@ -1,0 +1,1 @@
+/home/debian/UBSseq/Optimization/hotspot/fliter.sh: line 13: hisat-3n-table: command not found
