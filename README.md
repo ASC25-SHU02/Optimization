@@ -5,7 +5,8 @@
 > [!important]
 > Under development. Just for reference
 
-The script under `./hotspot` gets the time-consuming phases thoughout the workflow. Now, I focus on the `hisat-3n` tool. You can check my modification on codes [here]. I name my work after branch name `XXX_op`, where XXX explain what aspect I try to optimize in this branch, while op stands for optimization (genshin impact).
+The script under `./hotspot` gets the time-consuming phases thoughout the workflow. Now, I focus on the `hisat-3n` tool. You can check my modification on codes [here](https://github.com/ASC25-SHU02/hisat2/tree/getline_op). 
+I name my work after branch name `XXX_op`, where XXX explains what aspect I try to optimize in this branch, while op stands for optimization (genshin impact).
 
 ---
 # Origin stuff (Haven't changed)
