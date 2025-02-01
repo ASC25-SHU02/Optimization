@@ -10,32 +10,7 @@ Now, I focus on the `hisat-3n` tool. You can check my modification on codes [her
 
 I name my work after branch name `lsh_op/XXX`, where XXX explains what aspect I try to optimize in this branch, while op stands for optimization (genshin impact).
 
-Now, the **sota** is on `lsh_op/noThread`.
-
-## My result
-> detailed log is in `log/stage1_SRR23538290.sh.log`
-- time spent in `stage1`: `Total execution time: 2329 seconds`
-- Precision and correlation:
-  ```
-  =====Precision=====
-  97.47%
-  ===================
-  =====Correlation=====
-  0.997648
-  =====================
-  ```
-## Reproduce
-1. Configure and run the basic workflow under branch `config`
-2. Checkout to this branch, and run the scripts under directory `script`
-    - any script named after `stage1_XXX` is enough to witness the optimization
-    - you can run the whole workflow with the same procedure as described in `config`
-3. Check the result by running the script called `check.sh` under dir `./check`
-    - you can only check your result if you finish the whole workflow
-
-## TODO
-1. Overall workflow optimization:
-    - four hotspot commands run in parallel
-    - substitue `unix pipe` for temporary files
+Now, the **sota** is on `lsh_op/noThread` branch in that repo.
 
 ---
 # Origin stuff (Not changed)
