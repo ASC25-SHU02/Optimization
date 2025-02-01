@@ -1,10 +1,0 @@
-Starting: cutseq ../process/SRR23538291/SRR23538291.fastq \
-        -t 20 \
-        -A INLINE \
-        -m 20 \
-        --trim-polyA \
-        --ensure-inline-barcode\
-        -o ../process/SRR23538291/SRR23538291.fastq_cut \
-        -s ../process/SRR23538291/SRR23538291.fastq_tooshort \
-        -u ../process/SRR23538291/SRR23538291.fastq_untrimmed
-[8<----------] 00:00:01       564,948 reads @   1.8 µs/read;  33.78 M reads/minute

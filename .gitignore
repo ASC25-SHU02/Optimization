@@ -4,3 +4,8 @@
 data/
 
 unitest/
+
+log/
+
+check/correlation.tsv
+check/detected.tsv
