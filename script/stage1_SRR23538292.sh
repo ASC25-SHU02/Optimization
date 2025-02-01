@@ -1,7 +1,49 @@
 #!/bin/bash
 
+
+check_tools() {
+	echo "Checking the tools..."
+    for tool in cutseq hisat-3n samtools java python; do
+        if ! command -v $tool &> /dev/null; then
+            echo "$tool could not be found"
+            exit 1
+        fi
+    done
+	echo "All tools available"
+}
+
+check_tools
+
+echo "============================================================================"
+echo "YOU ARE RUNNING THE SCRIPTS FROM TEAM ASCeleration, developed by Shuhuai Li"
+echo "============================================================================"
+
+read -p "Do you want to enable timing for each step with tiny overhead? (yes/no): " enable_timing
+
+if [ "$enable_timing" == "yes" ]; then
+	echo "**Timing enabled. See logs in ./log/stage1_SRR23538292.sh.log**"
+    log_file="./log/stage1_SRR23538292.sh.log"
+    exec > >(tee -a $log_file)
+    exec 2>&1
+    start_time=$(date +%s)
+else 
+	echo "You didn't enable tming"
+fi
+
+run_with_timing() {
+	local cmd="$@"
+    echo "Starting: $cmd"
+    if [ "$enable_timing" == "yes" ]; then
+        time eval "$@"
+    else
+        eval "$@"
+    fi
+	echo "##################...Ending...##################"
+	echo
+}
+
 # Comment this command when running vtune, run it separately before the workflow
-cutseq ../process/SRR23538292/SRR23538292.fastq \
+run_with_timing 'cutseq ../process/SRR23538292/SRR23538292.fastq \
         -t 20 \
         -A INLINE \
         -m 20 \
@@ -9,9 +51,9 @@ cutseq ../process/SRR23538292/SRR23538292.fastq \
         --ensure-inline-barcode\
         -o ../process/SRR23538292/SRR23538292.fastq_cut \
         -s ../process/SRR23538292/SRR23538292.fastq_tooshort \
-        -u ../process/SRR23538292/SRR23538292.fastq_untrimmed
+        -u ../process/SRR23538292/SRR23538292.fastq_untrimmed'
 
-hisat-3n --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa \
+run_with_timing 'hisat-3n --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa \
     --summary-file ../process/SRR23538292/map2ncrna.output.summary \
     --new-summary \
     -q \
@@ -26,15 +68,15 @@ hisat-3n --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa \
     -e '!flag.unmap' \
     -O BAM \
     -U ../process/SRR23538292/SRR23538292.ncrna.unmapped.bam \
-    -o ../process/SRR23538292/SRR23538292.ncrna.mapped.bam
+    -o ../process/SRR23538292/SRR23538292.ncrna.mapped.bam'
 
 
-samtools fastq \
+run_with_timing 'samtools fastq \
 	-@ 16 \
 	-O ../process/SRR23538292/SRR23538292.ncrna.unmapped.bam \
-	> ../process/SRR23538292/SRR23538292.mRNA.fastq
+	> ../process/SRR23538292/SRR23538292.mRNA.fastq'
 
-hisat-3n \
+run_with_timing 'hisat-3n \
 	--index ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
 	-p 16 \
 	--summary-file ../process/SRR23538292/map2genome.output.summary \
@@ -50,76 +92,96 @@ hisat-3n \
 	-e '!flag.unmap'\
        	-O BAM \
 	-U ../process/SRR23538292/SRR23538292.mRNA.genome.unmapped.bam \
-	-o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.bam
+	-o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.bam'
 
-echo "FINISH ALL HISAT-3N & SAMTOOL VIEW. GET: mapped.bam"
 
-samtools sort -@ 16 \
+run_with_timing 'samtools sort -@ 16 \
 	--write-index \
 	-O BAM \
 	-o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.bam \
-	../process/SRR23538292/SRR23538292.mRNA.genome.mapped.bam
+	../process/SRR23538292/SRR23538292.mRNA.genome.mapped.bam'
 
-echo "FINISH [SAMTOOL] SORT. GET: mapped.sorted.bam"
 
-samtools view \
+run_with_timing 'samtools view \
 	-@ 20 \
 	-F 3980 \
 	-c ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.bam \
-	> ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.bam.tsv
+	> ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.bam.tsv'
 
-echo "FINISH SAMTOOLS VIEW. GET: mRNA.genome.mapped.sorted.bam.tsv"
 
-java -server -Xms8G -Xmx40G -Xss100M -Djava.io.tmpdir=../process/SRR23538292 -jar ../UMICollapse/umicollapse.jar bam -t 2 -T 16 --data naive --merge avgqual --two-pass -i ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.bam -o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam > ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.log
+run_with_timing 'java -server -Xms8G -Xmx40G -Xss100M \
+	-Djava.io.tmpdir=../process/SRR23538292 \
+	-jar ../UMICollapse/umicollapse.jar bam \
+	-t 2 -T 16 --data naive --merge avgqual --two-pass \
+	-i ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.bam \
+	-o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam \
+	> ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.log'
 
-echo "FINISH JAVA"
 
-samtools index \
+run_with_timing 'samtools index \
 	-@ 8 \
 	../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam \
-	../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam.bai
+	../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam.bai'
 
-echo "FINISH SAMTOOL INDEX"
-
-samtools view -e "rlen<100000" \
+run_with_timing 'samtools view -e "rlen<100000" \
 	-h ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam \
 	| hisat-3n-table \
-	-p 16 \
+	-p 4 \
 	-u --alignments - --ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
-	--output-name /dev/stdout \
-	--base-change C,T \
-	| cut -f 1,2,3,5,7 \
-	| gzip -c \
-	> ../process/SRR23538292/SRR23538292_unfiltered_uniq.tsv.gz
+	--output-name ../process/SRR23538292/SRR23538292_unfiltered_uniq.tsv \
+	--base-change C,T'
 
-echo "FINISH SAMTOOL. Get: unfiltered_uniq.tsv.gz"
 
-samtools view -e "rlen<100000" \
+run_with_timing 'samtools view -e "rlen<100000" \
 	-h ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam \
-	| hisat-3n-table -p 16 \
+	| hisat-3n-table -p 4 \
 	-m --alignments - \
 	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
-	--output-name /dev/stdout \
-	--base-change C,T \
-	| cut -f 1,2,3,5,7 \
-	| gzip -c \
-	> ../process/SRR23538292/SRR23538292_unfiltered_multi.tsv.gz
+	--output-name ../process/SRR23538292/SRR23538292_unfiltered_multi.tsv \
+	--base-change C,T'
 
-echo "FINISH SAMTOOL. Get: unfiltered_multi.tsv.gz"
 
-samtools view -@ 8 -e "[XM] * 20 <= (qlen-sclen) && [Zf] <= 3 && 3 * [Zf] <= [Zf] + [Yf]" ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam -O BAM -o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.filtered.bam
+run_with_timing 'samtools view -@ 8 \
+	-e "[XM] * 20 <= (qlen-sclen) && [Zf] <= 3 && 3 * [Zf] <= [Zf] + [Yf]" \
+	../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam \
+	-O BAM \
+	-o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.filtered.bam'
 
-echo "FINISH SAMTOOL [XM] * 20 <=. Get: mapped.sorted.dedup.filtered.bam"
 
-samtools view -e "rlen<100000" -h ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.filtered.bam | hisat-3n-table -p 16 -u --alignments - --ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa --output-name /dev/stdout --base-change C,T | cut -f 1,2,3,5,7 | gzip -c > ../process/SRR23538292/SRR23538292_filtered_uniq.tsv.gz
+run_with_timing 'samtools view \
+	-e "rlen<100000" \
+	-h ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.filtered.bam \
+	| hisat-3n-table \
+	-p 4 \
+	-u --alignments - \
+	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+	--output-name ../process/SRR23538292/SRR23538292_filtered_uniq.tsv\
+	--base-change C,T'
 
-echo "FINISH SAMTOOL rlen<100000. Get: filtered_uniq.tsv.gz"
 
-samtools view -e "rlen<100000" -h ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.filtered.bam | hisat-3n-table -p 16 -m --alignments - --ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa --output-name /dev/stdout --base-change C,T | cut -f 1,2,3,5,7 | gzip -c > ../process/SRR23538292/SRR23538292_filtered_multi.tsv.gz
+run_with_timing 'samtools view \
+	-e "rlen<100000" \
+	-h ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.filtered.bam \
+	| hisat-3n-table -p 4\
+	-m --alignments - \
+	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+	--output-name ../process/SRR23538292/SRR23538292_filtered_multi.tsv \
+	--base-change C,T'
 
-echo "FINISH SAMTOOL rlen<100000. Get: filtered_multi.tsv.gz"
 
 # You should also comment this command when vtune, and run it after finishing analysing the work
-python bin/join_pileup.py -i ../process/SRR23538292/SRR23538292_unfiltered_uniq.tsv.gz ../process/SRR23538292/SRR23538292_unfiltered_multi.tsv.gz ../process/SRR23538292/SRR23538292_filtered_uniq.tsv.gz ../process/SRR23538292/SRR23538292_filtered_multi.tsv.gz -o ../process/SRR23538292/SRR23538292_genome.arrow
+run_with_timing 'python bin/join_pileup.py \
+	-i ../process/SRR23538292/SRR23538292_unfiltered_uniq.tsv \
+	../process/SRR23538292/SRR23538292_unfiltered_multi.tsv \
+	../process/SRR23538292/SRR23538292_filtered_uniq.tsv \
+	../process/SRR23538292/SRR23538292_filtered_multi.tsv \
+	-o ../process/SRR23538292/SRR23538292_genome.arrow'
 
-echo "FINISH PYTHON. Get: genome.arrow"
+
+if [ "$enable_timing" == "yes" ]; then
+    end_time=$(date +%s)
+    total_time=$((end_time - start_time))
+    echo "Total execution time: $total_time seconds" | tee -a $log_file
+fi
+
+echo "FINISH ALL STEPS."

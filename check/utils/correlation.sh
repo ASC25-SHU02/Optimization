@@ -1,6 +1,5 @@
 #!/bin/bash
-
-echo "Correlation: "
+echo "=====Correlation====="
 awk '{
 sumXY += $1 * $2;
 sumX += $1;
@@ -11,3 +10,5 @@ n++;
 } END {
 print (n * sumXY - sumX * sumY) / (sqrt(n * sumX2 - sumX^2) * sqrt(n * sumY2 - sumY^2))
 }' correlation.tsv
+
+echo "====================="

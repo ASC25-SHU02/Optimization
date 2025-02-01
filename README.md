@@ -3,174 +3,31 @@
 # DEV by Shuhuai Li
 
 > [!important]
-> Under development. Just for reference
+> This branch just store the necessary scripts to optimize the workflow. There is modification on codes in other repos, like [hisat-3n](https://github.com/ASC25-SHU02/hisat2/tree/lsh_op/noThread)
+> It is still under development. But pass the necessary tests.
 
-The script under `./hotspot` gets the time-consuming phases thoughout the workflow. Now, I focus on the `hisat-3n` tool. You can check my modification on codes [here](https://github.com/ASC25-SHU02/hisat2/tree/getline_op). 
-I name my work after branch name `XXX_op`, where XXX explains what aspect I try to optimize in this branch, while op stands for optimization (genshin impact).
+Now, I focus on the `hisat-3n` tool. You can check my modification on codes [here](https://github.com/ASC25-SHU02/hisat2). 
+
+I name my work after branch name `lsh_op/XXX`, where XXX explains what aspect I try to optimize in this branch, while op stands for optimization (genshin impact).
+
+Now, the **sota** is on `lsh_op/noThread`.
+
+## My result
+
+## Reproduce
+1. Configure and run the basic workflow under branch `config`
+2. Checkout to this branch, and run the scripts under directory `script`
+  - any script named after `stage1_XXX` is enough to witness the optimization
+  - you can run the whole workflow with the same procedure as described in `config`
+3. Check the result by running the script called `check.sh` under dir `./check`
 
 ## TODO
 1. Overall workflow optimization:
     - four hotspot commands run in parallel
     - substitue `unix pipe` for temporary files
-2. Lock-free queue
-在C++中，实现单生产者多消费者的无锁队列有多个成熟的库可供选择。以下是几个常用的库：
-
-### 1. **Boost.Lockfree**
-   - **简介**: Boost库提供了一个无锁队列的实现，支持单生产者单消费者（SPSC）和单生产者多消费者（SPMC）模式。
-   - **特点**: 高性能，易于集成，适合需要无锁队列的场景。
-   - **示例**:
-     ```cpp
-     #include <boost/lockfree/queue.hpp>
-     #include <thread>
-     #include <iostream>
-
-     boost::lockfree::queue<int> queue(128);
-
-     void producer() {
-         for (int i = 0; i < 100; ++i) {
-             while (!queue.push(i)) { }
-         }
-     }
-
-     void consumer(int id) {
-         int value;
-         while (queue.pop(value)) {
-             std::cout << "Consumer " << id << " popped " << value << std::endl;
-         }
-     }
-
-     int main() {
-         std::thread prod(producer);
-         std::thread cons1(consumer, 1);
-         std::thread cons2(consumer, 2);
-
-         prod.join();
-         cons1.join();
-         cons2.join();
-
-         return 0;
-     }
-     ```
-
-### 2. **Moodycamel::ConcurrentQueue**
-   - **简介**: 这是一个高性能的无锁队列，支持多生产者多消费者（MPMC）模式，同时也适用于单生产者多消费者（SPMC）场景。
-   - **特点**: 高性能，易于使用，支持批量操作。
-   - **示例**:
-     ```cpp
-     #include "concurrentqueue.h"
-     #include <thread>
-     #include <iostream>
-
-     moodycamel::ConcurrentQueue<int> queue;
-
-     void producer() {
-         for (int i = 0; i < 100; ++i) {
-             queue.enqueue(i);
-         }
-     }
-
-     void consumer(int id) {
-         int value;
-         while (queue.try_dequeue(value)) {
-             std::cout << "Consumer " << id << " popped " << value << std::endl;
-         }
-     }
-
-     int main() {
-         std::thread prod(producer);
-         std::thread cons1(consumer, 1);
-         std::thread cons2(consumer, 2);
-
-         prod.join();
-         cons1.join();
-         cons2.join();
-
-         return 0;
-     }
-     ```
-
-### 3. **Folly's MPMCQueue**
-   - **简介**: Folly是Facebook开源的C++库，其中的`MPMCQueue`是一个高性能的无锁队列，支持多生产者多消费者模式。
-   - **特点**: 高性能，适合高并发场景。
-   - **示例**:
-     ```cpp
-     #include <folly/MPMCQueue.h>
-     #include <thread>
-     #include <iostream>
-
-     folly::MPMCQueue<int> queue(128);
-
-     void producer() {
-         for (int i = 0; i < 100; ++i) {
-             queue.write(i);
-         }
-     }
-
-     void consumer(int id) {
-         int value;
-         while (queue.read(value)) {
-             std::cout << "Consumer " << id << " popped " << value << std::endl;
-         }
-     }
-
-     int main() {
-         std::thread prod(producer);
-         std::thread cons1(consumer, 1);
-         std::thread cons2(consumer, 2);
-
-         prod.join();
-         cons1.join();
-         cons2.join();
-
-         return 0;
-     }
-     ```
-
-### 4. **TBB (Intel Threading Building Blocks)**
-   - **简介**: Intel TBB库提供了一个并发队列`concurrent_queue`，支持多生产者多消费者模式。
-   - **特点**: 高性能，适合多线程编程。
-   - **示例**:
-     ```cpp
-     #include <tbb/concurrent_queue.h>
-     #include <thread>
-     #include <iostream>
-
-     tbb::concurrent_queue<int> queue;
-
-     void producer() {
-         for (int i = 0; i < 100; ++i) {
-             queue.push(i);
-         }
-     }
-
-     void consumer(int id) {
-         int value;
-         while (queue.try_pop(value)) {
-             std::cout << "Consumer " << id << " popped " << value << std::endl;
-         }
-     }
-
-     int main() {
-         std::thread prod(producer);
-         std::thread cons1(consumer, 1);
-         std::thread cons2(consumer, 2);
-
-         prod.join();
-         cons1.join();
-         cons2.join();
-
-         return 0;
-     }
-     ```
-
-### 总结
-- **Boost.Lockfree**: 适合需要轻量级无锁队列的场景。
-- **Moodycamel::ConcurrentQueue**: 高性能，支持批量操作，适合高并发场景。
-- **Folly's MPMCQueue**: 高性能，适合高并发场景，尤其是Facebook的开源项目。
-- **TBB**: 适合需要与Intel TBB其他组件集成的场景。
 
 ---
-# Origin stuff (Haven't changed)
+# Origin stuff (Not changed)
 
 # m<sup>5</sup>C-UBSseq
 

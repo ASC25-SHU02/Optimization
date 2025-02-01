@@ -1,0 +1,265 @@
+Starting: cutseq ../process/SRR23538290/SRR23538290.fastq \
+        -t 20 \
+        -A INLINE \
+        -m 20 \
+        --trim-polyA \
+        --ensure-inline-barcode\
+        -o ../process/SRR23538290/SRR23538290.fastq_cut \
+        -s ../process/SRR23538290/SRR23538290.fastq_tooshort \
+        -u ../process/SRR23538290/SRR23538290.fastq_untrimmed
+[8<----------] 00:00:01       564,948 reads @   1.8 µs/read;  33.20 M reads/minute[8=----------] 00:00:02     1,321,078 reads @   1.4 µs/read;  43.75 M reads/minute[ 8<---------] 00:00:03     2,110,662 reads @   1.3 µs/read;  46.43 M reads/minute[ 8=---------] 00:00:04     2,822,582 reads @   1.4 µs/read;  42.58 M reads/minute[  8<--------] 00:00:05     3,586,278 reads @   1.3 µs/read;  45.36 M reads/minute[  8=--------] 00:00:06     4,362,918 reads @   1.3 µs/read;  46.21 M reads/minute[   8<-------] 00:00:07     5,061,894 reads @   1.4 µs/read;  41.68 M reads/minute[   8=-------] 00:00:08     5,864,422 reads @   1.3 µs/read;  47.46 M reads/minute[    8<------] 00:00:09     6,589,286 reads @   1.4 µs/read;  43.27 M reads/minute[    8=------] 00:00:10     7,301,206 reads @   1.4 µs/read;  42.69 M reads/minute[     8<-----] 00:00:11     8,077,846 reads @   1.4 µs/read;  43.26 M reads/minute[     8=-----] 00:00:12     8,841,542 reads @   1.3 µs/read;  45.37 M reads/minute[      8<----] 00:00:13     9,592,294 reads @   1.4 µs/read;  44.02 M reads/minute[      8=----] 00:00:14    10,351,646 reads @   1.4 µs/read;  42.23 M reads/minute[       8<---] 00:00:15    11,106,020 reads @   1.3 µs/read;  45.01 M reads/minute[       8=---] 00:00:16    11,834,822 reads @   1.4 µs/read;  43.72 M reads/minute[        8<--] 00:00:17    12,601,982 reads @   1.3 µs/read;  45.48 M reads/minute[        8=--] 00:00:18    13,317,998 reads @   1.4 µs/read;  41.70 M reads/minute[         8<-] 00:00:19    14,072,372 reads @   1.3 µs/read;  45.12 M reads/minute[         8=-] 00:00:20    14,775,602 reads @   1.4 µs/read;  41.42 M reads/minute[          8<] 00:00:21    15,581,120 reads @   1.2 µs/read;  48.16 M reads/minute[          8=] 00:00:22    16,297,136 reads @   1.4 µs/read;  42.73 M reads/minute[---------->8] 00:00:23    17,051,510 reads @   1.4 µs/read;  43.88 M reads/minute[----------=8] 00:00:24    17,780,312 reads @   1.4 µs/read;  42.87 M reads/minute[--------->8 ] 00:00:25    18,521,900 reads @   1.4 µs/read;  44.10 M reads/minute[---------=8 ] 00:00:26    19,263,488 reads @   1.4 µs/read;  43.97 M reads/minute[-------->8  ] 00:00:27    20,005,076 reads @   1.4 µs/read;  43.44 M reads/minute[--------=8  ] 00:00:28    20,772,236 reads @   1.3 µs/read;  45.96 M reads/minute[------->8   ] 00:00:29    21,475,466 reads @   1.4 µs/read;  41.97 M reads/minute[-------=8   ] 00:00:30    22,229,840 reads @   1.3 µs/read;  45.15 M reads/minute[------>8    ] 00:00:31    22,958,642 reads @   1.4 µs/read;  43.52 M reads/minute[------=8    ] 00:00:32    23,674,658 reads @   1.4 µs/read;  42.65 M reads/minute[----->8     ] 00:00:33    24,441,818 reads @   1.3 µs/read;  45.51 M reads/minute[-----=8     ] 00:00:34    25,196,192 reads @   1.3 µs/read;  44.47 M reads/minute[---->8      ] 00:00:35    25,886,636 reads @   1.5 µs/read;  41.35 M reads/minute[----=8      ] 00:00:36    26,666,582 reads @   1.3 µs/read;  46.31 M reads/minute[--->8       ] 00:00:37    27,382,598 reads @   1.4 µs/read;  42.10 M reads/minute[---=8       ] 00:00:38    28,124,186 reads @   1.4 µs/read;  44.25 M reads/minute[-->8        ] 00:00:39    28,865,774 reads @   1.4 µs/read;  42.49 M reads/minute[--=8        ] 00:00:40    29,607,362 reads @   1.4 µs/read;  43.81 M reads/minute[->8         ] 00:00:41    30,348,950 reads @   1.4 µs/read;  44.40 M reads/minute[-=8         ] 00:00:42    31,090,538 reads @   1.4 µs/read;  44.29 M reads/minute[>8          ] 00:00:43    31,806,554 reads @   1.4 µs/read;  42.71 M reads/minute[=8          ] 00:00:44    32,509,784 reads @   1.4 µs/read;  42.12 M reads/minute[8<----------] 00:00:45    33,225,800 reads @   1.4 µs/read;  42.17 M reads/minute[8=----------] 00:00:46    33,941,816 reads @   1.4 µs/read;  42.79 M reads/minute[ 8<---------] 00:00:47    34,632,260 reads @   1.5 µs/read;  41.29 M reads/minute[ 8=---------] 00:00:48    35,348,276 reads @   1.4 µs/read;  42.75 M reads/minute[  8<--------] 00:00:49    36,051,506 reads @   1.5 µs/read;  41.33 M reads/minute[  8=--------] 00:00:50    36,780,308 reads @   1.4 µs/read;  43.21 M reads/minute[   8<-------] 00:00:51    37,496,324 reads @   1.4 µs/read;  42.67 M reads/minute[   8=-------] 00:00:52    38,186,768 reads @   1.5 µs/read;  40.99 M reads/minute[    8<------] 00:00:53    38,889,998 reads @   1.4 µs/read;  41.88 M reads/minute[    8=------] 00:00:54    39,593,228 reads @   1.4 µs/read;  41.48 M reads/minute[     8<-----] 00:00:55    40,347,602 reads @   1.4 µs/read;  42.75 M reads/minute[     8=-----] 00:00:56    41,089,190 reads @   1.4 µs/read;  44.42 M reads/minute[      8<----] 00:00:57    41,805,206 reads @   1.5 µs/read;  41.03 M reads/minute[      8=----] 00:00:58    42,546,794 reads @   1.4 µs/read;  44.14 M reads/minute[       8<---] 00:00:59    43,237,238 reads @   1.5 µs/read;  41.17 M reads/minute[       8=---] 00:01:00    43,953,254 reads @   1.4 µs/read;  42.82 M reads/minute[        8<--] 00:01:01    44,669,270 reads @   1.4 µs/read;  42.45 M reads/minute[        8=--] 00:01:02    45,372,500 reads @   1.4 µs/read;  41.48 M reads/minute[         8<-] 00:01:03    46,101,302 reads @   1.4 µs/read;  42.86 M reads/minute[         8=-] 00:01:04    46,804,532 reads @   1.5 µs/read;  40.72 M reads/minute[          8<] 00:01:06    47,520,548 reads @   1.5 µs/read;  40.99 M reads/minute[          8=] 00:01:07    48,274,922 reads @   1.4 µs/read;  43.90 M reads/minute[---------->8] 00:01:08    48,990,938 reads @   1.4 µs/read;  42.20 M reads/minute[----------=8] 00:01:09    49,668,596 reads @   1.5 µs/read;  40.41 M reads/minute[--------->8 ] 00:01:10    50,422,970 reads @   1.3 µs/read;  44.80 M reads/minute[---------=8 ] 00:01:11    51,062,270 reads @   1.6 µs/read;  38.35 M reads/minute[-------->8  ] 00:01:12    51,778,286 reads @   1.4 µs/read;  42.77 M reads/minute[--------=8  ] 00:01:13    52,507,088 reads @   1.5 µs/read;  40.64 M reads/minute[------->8   ] 00:01:14    53,223,104 reads @   1.4 µs/read;  42.96 M reads/minute[-------=8   ] 00:01:15    53,939,120 reads @   1.4 µs/read;  42.80 M reads/minute[------>8    ] 00:01:16    54,642,350 reads @   1.4 µs/read;  41.97 M reads/minute[------=8    ] 00:01:17    55,332,794 reads @   1.5 µs/read;  40.78 M reads/minute[----->8     ] 00:01:18    56,048,810 reads @   1.4 µs/read;  42.49 M reads/minute[-----=8     ] 00:01:19    56,777,612 reads @   1.4 µs/read;  43.38 M reads/minute[---->8      ] 00:01:20    57,455,270 reads @   1.5 µs/read;  40.64 M reads/minute[----=8      ] 00:01:21    58,171,286 reads @   1.4 µs/read;  42.41 M reads/minute[--->8       ] 00:01:22    58,861,730 reads @   1.5 µs/read;  41.17 M reads/minute[---=8       ] 00:01:23    59,616,104 reads @   1.4 µs/read;  43.75 M reads/minute[-->8        ] 00:01:24    60,344,906 reads @   1.4 µs/read;  43.60 M reads/minute[--=8        ] 00:01:25    61,035,350 reads @   1.5 µs/read;  40.47 M reads/minute[->8         ] 00:01:26    61,764,152 reads @   1.4 µs/read;  43.03 M reads/minute[-=8         ] 00:01:27    62,429,024 reads @   1.5 µs/read;  39.44 M reads/minute[>8          ] 00:01:28    63,208,970 reads @   1.4 µs/read;  44.22 M reads/minute[=8          ] 00:01:29    63,912,200 reads @   1.4 µs/read;  41.50 M reads/minute[8<----------] 00:01:30    64,628,216 reads @   1.5 µs/read;  41.24 M reads/minute[8=----------] 00:01:31    65,369,804 reads @   1.4 µs/read;  43.99 M reads/minute[ 8<---------] 00:01:32    66,073,034 reads @   1.4 µs/read;  42.11 M reads/minute[ 8=---------] 00:01:33    66,750,692 reads @   1.5 µs/read;  40.64 M reads/minute[  8<--------] 00:01:34    67,466,708 reads @   1.4 µs/read;  42.64 M reads/minute[  8=--------] 00:01:35    68,182,724 reads @   1.4 µs/read;  42.42 M reads/minute[   8<-------] 00:01:36    68,860,382 reads @   1.5 µs/read;  40.65 M reads/minute[   8=-------] 00:01:37    69,614,756 reads @   1.3 µs/read;  45.16 M reads/minute[    8<------] 00:01:38    70,305,200 reads @   1.5 µs/read;  40.97 M reads/minute[    8=------] 00:01:39    71,046,788 reads @   1.4 µs/read;  42.55 M reads/minute[     8<-----] 00:01:40    71,737,232 reads @   1.5 µs/read;  41.20 M reads/minute[     8=-----] 00:01:41    72,453,248 reads @   1.4 µs/read;  42.16 M reads/minute[      8<----] 00:01:42    73,169,264 reads @   1.4 µs/read;  42.54 M reads/minute[      8=----] 00:01:43    73,834,136 reads @   1.5 µs/read;  39.04 M reads/minute[       8<---] 00:01:44    74,588,510 reads @   1.4 µs/read;  42.77 M reads/minute[       8=---] 00:01:45    75,291,740 reads @   1.5 µs/read;  41.27 M reads/minute[        8<--] 00:01:46    76,020,542 reads @   1.4 µs/read;  43.43 M reads/minute[        8=--] 00:01:47    76,749,344 reads @   1.4 µs/read;  43.54 M reads/minute[         8<-] 00:01:48    77,439,788 reads @   1.5 µs/read;  40.96 M reads/minute[         8=-] 00:01:49    78,143,018 reads @   1.4 µs/read;  41.56 M reads/minute[          8<] 00:01:50    78,859,034 reads @   1.5 µs/read;  41.31 M reads/minute[          8=] 00:01:51    79,587,836 reads @   1.4 µs/read;  43.33 M reads/minute[---------->8] 00:01:52    80,316,638 reads @   1.4 µs/read;  43.55 M reads/minute[----------=8] 00:01:53    81,007,082 reads @   1.5 µs/read;  40.28 M reads/minute[--------->8 ] 00:01:54    81,697,526 reads @   1.5 µs/read;  41.18 M reads/minute[---------=8 ] 00:01:55    82,439,114 reads @   1.4 µs/read;  44.11 M reads/minute[-------->8  ] 00:01:56    83,167,916 reads @   1.4 µs/read;  42.46 M reads/minute[--------=8  ] 00:01:57    83,858,360 reads @   1.5 µs/read;  40.76 M reads/minute[------->8   ] 00:01:58    84,561,590 reads @   1.4 µs/read;  41.62 M reads/minute[-------=8   ] 00:01:59    85,303,178 reads @   1.4 µs/read;  44.42 M reads/minute[------>8    ] 00:02:00    86,006,408 reads @   1.5 µs/read;  41.02 M reads/minute[------=8    ] 00:02:01    86,709,638 reads @   1.4 µs/read;  42.12 M reads/minute[----->8     ] 00:02:02    87,412,868 reads @   1.4 µs/read;  41.66 M reads/minute[-----=8     ] 00:02:03    88,141,670 reads @   1.4 µs/read;  42.65 M reads/minute[---->8      ] 00:02:04    88,832,114 reads @   1.5 µs/read;  41.25 M reads/minute[----=8      ] 00:02:05    89,548,130 reads @   1.4 µs/read;  42.78 M reads/minute[--->8       ] 00:02:06    90,264,146 reads @   1.4 µs/read;  41.85 M reads/minute[---=8       ] 00:02:07    90,980,162 reads @   1.4 µs/read;  42.74 M reads/minute[-->8        ] 00:02:08    91,696,178 reads @   1.4 µs/read;  42.39 M reads/minute[--=8        ] 00:02:10    92,424,980 reads @   1.4 µs/read;  41.84 M reads/minute[->8         ] 00:02:11    93,140,996 reads @   1.4 µs/read;  42.05 M reads/minuteDone           00:02:11    93,554,170 reads @   1.4 µs/read;  42.67 M reads/minute
+status	in_reads	in_bp	too_short	too_long	too_many_n	out_reads	w/adapters	qualtrim_bp	out_bp
+WARN	93554170	11320054570	2330279	0	0	88844009	185602902	25877348	4515246194
+
+real	2m12.632s
+user	43m17.469s
+sys	0m41.304s
+##################...Ending...##################
+
+Starting: hisat-3n --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa \
+    --summary-file ../process/SRR23538290/map2ncrna.output.summary \
+    --new-summary \
+    -q \
+    -U ../process/SRR23538290/SRR23538290.fastq_cut\
+    -p 16 \
+    --base-change C,T \
+    --mp 8,2 \
+    --no-spliced-alignment \
+    --directional-mapping \
+    | samtools \
+    view -@ 16 \
+    -e !flag.unmap \
+    -O BAM \
+    -U ../process/SRR23538290/SRR23538290.ncrna.unmapped.bam \
+    -o ../process/SRR23538290/SRR23538290.ncrna.mapped.bam
+(INFO): Before arg handling:
+(INFO):   Wrapper args:
+[ -U ../process/SRR23538290/SRR23538290.fastq_cut ]
+(INFO):   Binary args:
+[ --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa --summary-file ../process/SRR23538290/map2ncrna.output.summary --new-summary -q -p 16 --base-change C,T --mp 8,2 --no-spliced-alignment --directional-mapping ]
+(INFO): Check read length: ../process/SRR23538290/SRR23538290.fastq_cut
+(INFO): the command: ['/home/debian/Downloads/hisat-3n/hisat2_read_statistics.py' ../process/SRR23538290/SRR23538290.fastq_cut]; read length: []
+(INFO): Read Length String: 43,45,48,47,49,42,44,53,50,46,41,51,52,54,55,56,57,40,39,38,59,58,61,37,60,63,36,64,62,65,35,66,67,68,33,34,32,73,69,71,70,72,30,28,74,31,29,76,26,24,77,25,75,22,80,78,23,79,27,20,85,21,82,86,84,81,83,90,87,89,88,94,91,92,97,98,93,95,99,105,102,106,96
+(INFO): Check read length finished
+(INFO): check file exist finished
+(INFO): Warp Input finished
+(INFO): DiduDidu
+(INFO): After arg handling:
+(INFO):   Binary args:
+[ --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa --summary-file ../process/SRR23538290/map2ncrna.output.summary --new-summary -q -p 16 --base-change C,T --mp 8,2 --no-spliced-alignment --directional-mapping --read-lengths 43,45,48,47,49,42,44,53,50,46,41,51,52,54,55,56,57,40,39,38,59,58,61,37,60,63,36,64,62,65,35,66,67,68,33,34,32,73,69,71,70,72,30,28,74,31,29,76,26,24,77,25,75,22,80,78,23,79,27,20,85,21,82,86,84,81,83,90,87,89,88,94,91,92,97,98,93,95,99,105,102,106,96 -U ../process/SRR23538290/SRR23538290.fastq_cut ]
+(INFO): index_opt is [-x](INFO): Cannot find any index option (--reference-string, --ref-string or -x) in the given command line.
+(INFO): Index_name is [ 1 ]
+(INFO): find their names: [1.3n.CT.1.ht2l] and [1.3n.GA.1.ht2l]
+(INFO): find their names: [1.3n.CT.1.ht2] and [1.3n.GA.1.ht2]
+(INFO): Using the small index (1.3n.CT.1.ht2).
+(INFO): '/home/debian/Downloads/hisat-3n/hisat2-align-s' --wrapper basic-0 --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa --summary-file ../process/SRR23538290/map2ncrna.output.summary --new-summary -q -p 16 --base-change C,T --mp 8,2 --no-spliced-alignment --directional-mapping --read-lengths 43,45,48,47,49,42,44,53,50,46,41,51,52,54,55,56,57,40,39,38,59,58,61,37,60,63,36,64,62,65,35,66,67,68,33,34,32,73,69,71,70,72,30,28,74,31,29,76,26,24,77,25,75,22,80,78,23,79,27,20,85,21,82,86,84,81,83,90,87,89,88,94,91,92,97,98,93,95,99,105,102,106,96 -U ../process/SRR23538290/SRR23538290.fastq_cut --3N
+HISAT2 summary stats:
+	Total reads: 88844009
+		Aligned 0 time: 76051745 (85.60%)
+		Aligned 1 time: 5891778 (6.63%)
+		Aligned >1 times: 6900486 (7.77%)
+	Overall alignment rate: 14.40%
+
+real	5m16.510s
+user	84m27.133s
+sys	2m16.677s
+##################...Ending...##################
+
+Starting: samtools fastq \
+	-@ 16 \
+	-O ../process/SRR23538290/SRR23538290.ncrna.unmapped.bam \
+	> ../process/SRR23538290/SRR23538290.mRNA.fastq
+[M::bam2fq_mainloop] discarded 0 singletons
+[M::bam2fq_mainloop] processed 76051745 reads
+
+real	0m15.729s
+user	0m18.852s
+sys	0m4.614s
+##################...Ending...##################
+
+Starting: hisat-3n \
+	--index ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+	-p 16 \
+	--summary-file ../process/SRR23538290/map2genome.output.summary \
+	--new-summary \
+	-q \
+	-U ../process/SRR23538290/SRR23538290.mRNA.fastq \
+	--directional-mapping \
+	--base-change C,T \
+	--pen-noncansplice 20 \
+	--mp 4,1 \
+	| samtools view \
+	-@ 16 \
+	-e !flag.unmap\
+       	-O BAM \
+	-U ../process/SRR23538290/SRR23538290.mRNA.genome.unmapped.bam \
+	-o ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.bam
+(INFO): Before arg handling:
+(INFO):   Wrapper args:
+[ -U ../process/SRR23538290/SRR23538290.mRNA.fastq ]
+(INFO):   Binary args:
+[ --index ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa -p 16 --summary-file ../process/SRR23538290/map2genome.output.summary --new-summary -q --directional-mapping --base-change C,T --pen-noncansplice 20 --mp 4,1 ]
+(INFO): Check read length: ../process/SRR23538290/SRR23538290.mRNA.fastq
+(INFO): the command: ['/home/debian/Downloads/hisat-3n/hisat2_read_statistics.py' ../process/SRR23538290/SRR23538290.mRNA.fastq]; read length: []
+(INFO): Read Length String: 43,45,49,48,47,42,46,44,53,50,52,51,41,55,54,57,56,39,40,59,58,38,37,61,63,60,36,64,62,65,66,67,35,68,33,34,32,69,73,71,72,70,31,74,30,28,29,76,75,26,77,80,24,79,78,25,22,27,23,83,84,85,82,81,87,86,90,89,21,88,20,94,91,92,99,98,93,97,95,102,105,106,96
+(INFO): Check read length finished
+(INFO): check file exist finished
+(INFO): Warp Input finished
+(INFO): DiduDidu
+(INFO): After arg handling:
+(INFO):   Binary args:
+[ --index ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa -p 16 --summary-file ../process/SRR23538290/map2genome.output.summary --new-summary -q --directional-mapping --base-change C,T --pen-noncansplice 20 --mp 4,1 --read-lengths 43,45,49,48,47,42,46,44,53,50,52,51,41,55,54,57,56,39,40,59,58,38,37,61,63,60,36,64,62,65,66,67,35,68,33,34,32,69,73,71,72,70,31,74,30,28,29,76,75,26,77,80,24,79,78,25,22,27,23,83,84,85,82,81,87,86,90,89,21,88,20,94,91,92,99,98,93,97,95,102,105,106,96 -U ../process/SRR23538290/SRR23538290.mRNA.fastq ]
+(INFO): index_opt is [-x](INFO): Cannot find any index option (--reference-string, --ref-string or -x) in the given command line.
+(INFO): Index_name is [ 1 ]
+(INFO): find their names: [1.3n.CT.1.ht2l] and [1.3n.GA.1.ht2l]
+(INFO): find their names: [1.3n.CT.1.ht2] and [1.3n.GA.1.ht2]
+(INFO): Using the small index (1.3n.CT.1.ht2).
+(INFO): '/home/debian/Downloads/hisat-3n/hisat2-align-s' --wrapper basic-0 --index ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa -p 16 --summary-file ../process/SRR23538290/map2genome.output.summary --new-summary -q --directional-mapping --base-change C,T --pen-noncansplice 20 --mp 4,1 --read-lengths 43,45,49,48,47,42,46,44,53,50,52,51,41,55,54,57,56,39,40,59,58,38,37,61,63,60,36,64,62,65,66,67,35,68,33,34,32,69,73,71,72,70,31,74,30,28,29,76,75,26,77,80,24,79,78,25,22,27,23,83,84,85,82,81,87,86,90,89,21,88,20,94,91,92,99,98,93,97,95,102,105,106,96 -U ../process/SRR23538290/SRR23538290.mRNA.fastq --3N
+HISAT2 summary stats:
+	Total reads: 76051745
+		Aligned 0 time: 6445095 (8.47%)
+		Aligned 1 time: 60736402 (79.86%)
+		Aligned >1 times: 8870248 (11.66%)
+	Overall alignment rate: 91.53%
+
+real	9m30.919s
+user	153m0.485s
+sys	2m20.908s
+##################...Ending...##################
+
+Starting: samtools sort -@ 16 \
+	--write-index \
+	-O BAM \
+	-o ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam \
+	../process/SRR23538290/SRR23538290.mRNA.genome.mapped.bam
+[E::hts_open_format] Failed to open file "../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam.tmp.0000.bam" : File exists
+samtools sort: failed to create "../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam.tmp.0000.bam": File exists
+[bam_sort_core] merging from 1 files and 16 in-memory blocks...
+
+real	0m52.408s
+user	5m29.438s
+sys	0m12.374s
+##################...Ending...##################
+
+Starting: samtools view \
+	-@ 20 \
+	-F 3980 \
+	-c ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam \
+	> ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam.tsv
+
+real	0m3.803s
+user	0m14.015s
+sys	0m1.845s
+##################...Ending...##################
+
+Starting: java -server -Xms8G -Xmx40G -Xss100M \
+	-Djava.io.tmpdir=../process/SRR23538290 \
+	-jar ../UMICollapse/umicollapse.jar bam \
+	-t 2 -T 16 --data naive --merge avgqual --two-pass \
+	-i ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam \
+	-o ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.bam \
+	> ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.log
+WARNING: BAM index file /home/debian/UBSseq/Optimization/../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam.csi is older than BAM /home/debian/UBSseq/Optimization/../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam
+WARNING: BAM index file /home/debian/UBSseq/Optimization/../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam.csi is older than BAM /home/debian/UBSseq/Optimization/../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.bam
+INFO	2025-02-01 15:52:33	SortingCollection	Creating merging iterator from 137 files
+
+real	6m49.849s
+user	12m41.345s
+sys	0m44.543s
+##################...Ending...##################
+
+Starting: samtools index \
+	-@ 8 \
+	../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.bam \
+	../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.bam.bai
+
+real	0m3.204s
+user	0m11.705s
+sys	0m1.499s
+##################...Ending...##################
+
+Starting: samtools view -e "rlen<100000" \
+	-h ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.bam \
+	| hisat-3n-table \
+	-p 4 \
+	-u --alignments - --ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+	--output-name ../process/SRR23538290/SRR23538290_unfiltered_uniq.tsv \
+	--base-change C,T
+
+real	3m24.024s
+user	3m45.742s
+sys	0m8.978s
+##################...Ending...##################
+
+Starting: samtools view -e "rlen<100000" \
+	-h ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.bam \
+	| hisat-3n-table -p 4 \
+	-m --alignments - \
+	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+	--output-name ../process/SRR23538290/SRR23538290_unfiltered_multi.tsv \
+	--base-change C,T
+
+real	2m58.585s
+user	3m21.167s
+sys	0m7.639s
+##################...Ending...##################
+
+Starting: samtools view -@ 8 \
+	-e "[XM] * 20 <= (qlen-sclen) && [Zf] <= 3 && 3 * [Zf] <= [Zf] + [Yf]" \
+	../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.bam \
+	-O BAM \
+	-o ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.filtered.bam
+
+real	0m37.294s
+user	3m10.084s
+sys	0m4.905s
+##################...Ending...##################
+
+Starting: samtools view \
+	-e "rlen<100000" \
+	-h ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.filtered.bam \
+	| hisat-3n-table \
+	-p 4 \
+	-u --alignments - \
+	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+	--output-name ../process/SRR23538290/SRR23538290_filtered_uniq.tsv\
+	--base-change C,T
+
+real	3m20.890s
+user	3m43.999s
+sys	0m8.398s
+##################...Ending...##################
+
+Starting: samtools view \
+	-e "rlen<100000" \
+	-h ../process/SRR23538290/SRR23538290.mRNA.genome.mapped.sorted.dedup.filtered.bam \
+	| hisat-3n-table -p 4\
+	-m --alignments - \
+	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+	--output-name ../process/SRR23538290/SRR23538290_filtered_multi.tsv \
+	--base-change C,T
+
+real	2m57.944s
+user	3m20.359s
+sys	0m7.700s
+##################...Ending...##################
+
+Starting: python bin/join_pileup.py \
+	-i ../process/SRR23538290/SRR23538290_unfiltered_uniq.tsv \
+	../process/SRR23538290/SRR23538290_unfiltered_multi.tsv \
+	../process/SRR23538290/SRR23538290_filtered_uniq.tsv \
+	../process/SRR23538290/SRR23538290_filtered_multi.tsv \
+	-o ../process/SRR23538290/SRR23538290_genome.arrow
+/home/debian/UBSseq/Optimization/bin/join_pileup.py:14: DeprecationWarning: The argument `dtypes` for `read_csv` is deprecated. It has been renamed to `schema_overrides`.
+  df = pl.read_csv(
+/home/debian/UBSseq/Optimization/bin/join_pileup.py:47: DeprecationWarning: Use of `how='outer_coalesce'` should be replaced with `how='full', coalesce=True`.
+  df_com = df_com.join(df, on=["ref", "pos", "strand"], how="outer_coalesce")
+
+real	0m25.286s
+user	0m59.257s
+sys	0m26.048s
+##################...Ending...##################
+
+Total execution time: 2329 seconds
+Total execution time: 2329 seconds
+FINISH ALL STEPS.

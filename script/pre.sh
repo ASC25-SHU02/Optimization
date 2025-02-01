@@ -8,7 +8,9 @@ hisat-3n-build \
 
 samtools faidx ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa
 
-awk 'BEGIN{{OFS="\\t"}}{{print $1,$1,0,$2,"+"}}' ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai > ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa.saf
+awk 'BEGIN{{OFS="\\t"}}{{print $1,$1,0,$2,"+"}}' \
+	../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai \
+	> ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa.saf
 
 hisat-3n-build \
 	-p 16 \

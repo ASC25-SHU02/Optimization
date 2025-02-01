@@ -11,4 +11,6 @@ total_detected=$(wc -l < "detected.tsv")
 precision=$(awk -v total="$total_detected" -v tp="$true_positives" 'BEGIN {printf "%.2f", (tp/total)*100}')
 
 # Output the precision
-echo "Precision: $precision%"
+echo "=====Precision====="
+echo "$precision%"
+echo "==================="
