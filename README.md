@@ -12,6 +12,9 @@ I name my work after branch name `lsh_op/XXX`, where XXX explains what aspect I 
 
 Now, the **sota** is on `lsh_op/noThread` branch in that repo.
 
+## Reproduce
+Just run `ALL_IN_ONE.SH`
+
 ---
 # Origin stuff (Not changed)
 
