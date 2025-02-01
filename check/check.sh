@@ -2,8 +2,8 @@
 
 python utils/get_intersection.py
 
-sh ./utils/precision.sh
+bash ./utils/precision.sh
 
 python utils/get_intersection.py
 
-sh ./utils/correlation.sh
+bash ./utils/correlation.sh
