@@ -27,9 +27,9 @@ def find_intersection(file1, file2, file3, output_file):
     print(f"交集已保存到 {output_file}，共 {len(intersection)} 行。")
 
 # 使用示例
-file1 = 'SRR23538290.filtered.tsv'  # 第一个文件路径
-file2 = 'SRR23538291.filtered.tsv'  # 第二个文件路径
-file3 = 'SRR23538292.filtered.tsv'  # 第三个文件路径
+file1 = '../../process/SRR23538290/SRR23538290.filtered.tsv'  # 第一个文件路径
+file2 = '../../process/SRR23538291/SRR23538291.filtered.tsv'  # 第二个文件路径
+file3 = '../../process/SRR23538292/SRR23538292.filtered.tsv'  # 第三个文件路径
 output_file = 'detected.tsv'  # 输出文件路径
 
 find_intersection(file1, file2, file3, output_file)

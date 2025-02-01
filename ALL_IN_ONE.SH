@@ -56,9 +56,9 @@ else
 fi
 
 time {
-    bash script/stage1_SRR23538290.sh enable_timing
-    bash script/stage1_SRR23538291.sh enable_timing
-    bash script/stage1_SRR23538292.sh enable_timing
+    bash script/stage1_SRR23538290.sh
+    bash script/stage1_SRR23538291.sh
+    bash script/stage1_SRR23538292.sh
 
     echo "@@@@@@@@@@@@@@@TIME SPENDT IN STAGE1@@@@@@@@@@@@@@@@"
 }
