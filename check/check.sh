@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo ""
 python utils/get_intersection.py
 
 bash ./utils/precision.sh

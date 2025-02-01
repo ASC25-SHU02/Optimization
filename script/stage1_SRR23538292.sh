@@ -1,46 +1,6 @@
 #!/bin/bash
 
-
-check_tools() {
-	echo "Checking the tools..."
-    for tool in cutseq hisat-3n samtools java python; do
-        if ! command -v $tool &> /dev/null; then
-            echo "$tool could not be found"
-            exit 1
-        fi
-    done
-	echo "All tools available"
-}
-
-check_tools
-
-echo "============================================================================"
-echo "YOU ARE RUNNING THE SCRIPTS FROM TEAM ASCeleration, developed by Shuhuai Li"
-echo "============================================================================"
-
-read -p "Do you want to enable timing for each step with tiny overhead? (yes/no): " enable_timing
-
-if [ "$enable_timing" == "yes" ]; then
-	echo "**Timing enabled. See logs in ./log/stage1_SRR23538292.sh.log**"
-    log_file="./log/stage1_SRR23538292.sh.log"
-    exec > >(tee -a $log_file)
-    exec 2>&1
-    start_time=$(date +%s)
-else 
-	echo "You didn't enable tming"
-fi
-
-run_with_timing() {
-	local cmd="$@"
-    echo "Starting: $cmd"
-    if [ "$enable_timing" == "yes" ]; then
-        time eval "$@"
-    else
-        eval "$@"
-    fi
-	echo "##################...Ending...##################"
-	echo
-}
+source ./script/func.sh
 
 # Comment this command when running vtune, run it separately before the workflow
 run_with_timing 'cutseq ../process/SRR23538292/SRR23538292.fastq \
@@ -177,11 +137,3 @@ run_with_timing 'python bin/join_pileup.py \
 	../process/SRR23538292/SRR23538292_filtered_multi.tsv \
 	-o ../process/SRR23538292/SRR23538292_genome.arrow'
 
-
-if [ "$enable_timing" == "yes" ]; then
-    end_time=$(date +%s)
-    total_time=$((end_time - start_time))
-    echo "Total execution time: $total_time seconds" | tee -a $log_file
-fi
-
-echo "FINISH ALL STEPS."

@@ -263,3 +263,14 @@ sys	0m26.048s
 Total execution time: 2329 seconds
 Total execution time: 2329 seconds
 FINISH ALL STEPS.
+
+Starting: cutseq ../process/SRR23538290/SRR23538290.fastq \
+        -t 20 \
+        -A INLINE \
+        -m 20 \
+        --trim-polyA \
+        --ensure-inline-barcode\
+        -o ../process/SRR23538290/SRR23538290.fastq_cut \
+        -s ../process/SRR23538290/SRR23538290.fastq_tooshort \
+        -u ../process/SRR23538290/SRR23538290.fastq_untrimmed
+[8<----------] 00:00:01       564,948 reads @   1.8 µs/read;  33.86 M reads/minute
