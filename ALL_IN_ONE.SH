@@ -20,6 +20,14 @@ function check_files {
 
 check_files
 
+
+function clear_files {
+    for sample in SRR23538290 SRR23538291 SRR23538292; do
+        find ../process/${sample} -type f -not -name ${sample}.fastq -delete
+    done
+}
+
+clear_files
 echo "
 *********************************************************
 **********************STAGE1*****************************
@@ -44,8 +52,8 @@ read -p "Do you want to enable timing for each step with tiny overhead? (yes/no)
 export enable_timing
 
 if [ "$enable_timing" == "yes" ]; then
-	echo "Timing enabled. See logs in ./log/time.log"
-    log_file="./log/stage1.sh.log"
+	echo "Timing enabled. See logs in ./log/origin.log"
+    log_file="./log/origin.sh.log"
     exec > >(tee -a $log_file)
     exec 2>&1
 else 
@@ -56,9 +64,9 @@ else
 fi
 
 time {
-    bash script/stage1_SRR23538290.sh
-    bash script/stage1_SRR23538291.sh
-    bash script/stage1_SRR23538292.sh
+    for sample in SRR23538290 SRR23538291 SRR23538292; do
+        bash script/stage1_${sample}.sh
+    done
 
     echo "@@@@@@@@@@@@@@@TIME SPENDT IN STAGE1@@@@@@@@@@@@@@@@"
 }
