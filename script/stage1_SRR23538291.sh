@@ -83,50 +83,46 @@ run_with_timing 'samtools index \
 	../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.bam \
 	../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.bam.bai'
 
-run_with_timing 'samtools view -e "rlen<100000" \
-	-h ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.bam \
-	| hisat-3n-table \
-	-p 4 \
-	-u --alignments - --ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
-	--output-name ../process/SRR23538291/SRR23538291_unfiltered_uniq.tsv \
-	--base-change C,T'
-
-
-run_with_timing 'samtools view -e "rlen<100000" \
-	-h ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.bam \
-	| hisat-3n-table -p 4 \
-	-m --alignments - \
-	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
-	--output-name ../process/SRR23538291/SRR23538291_unfiltered_multi.tsv \
-	--base-change C,T'
-
-
 run_with_timing 'samtools view -@ 8 \
 	-e "[XM] * 20 <= (qlen-sclen) && [Zf] <= 3 && 3 * [Zf] <= [Zf] + [Yf]" \
 	../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.bam \
 	-O BAM \
 	-o ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.filtered.bam'
 
+run_with_timing 'samtools view -e "rlen<100000" \
+	-h ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.bam \
+	| hisat-3n-table \
+	-u --alignments - --ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+	--output-name ../process/SRR23538291/SRR23538291_unfiltered_uniq.tsv \
+	--base-change C,T &
 
-run_with_timing 'samtools view \
+	samtools view -e "rlen<100000" \
+	-h ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.bam \
+	| hisat-3n-table \
+	-m --alignments - \
+	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+	--output-name ../process/SRR23538291/SRR23538291_unfiltered_multi.tsv \
+	--base-change C,T &
+
+	samtools view \
 	-e "rlen<100000" \
 	-h ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.filtered.bam \
 	| hisat-3n-table \
-	-p 4 \
 	-u --alignments - \
 	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
 	--output-name ../process/SRR23538291/SRR23538291_filtered_uniq.tsv\
-	--base-change C,T'
+	--base-change C,T &
 
-
-run_with_timing 'samtools view \
+    samtools view \
 	-e "rlen<100000" \
 	-h ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.filtered.bam \
-	| hisat-3n-table -p 4\
+	| hisat-3n-table \
 	-m --alignments - \
 	--ref ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
 	--output-name ../process/SRR23538291/SRR23538291_filtered_multi.tsv \
-	--base-change C,T'
+	--base-change C,T &
+	
+	wait'
 
 
 # You should also comment this command when vtune, and run it after finishing analysing the work
