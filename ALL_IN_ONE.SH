@@ -45,7 +45,7 @@ export enable_timing
 
 if [ "$enable_timing" == "yes" ]; then
 	echo "Timing enabled. See logs in ./log/time.log"
-    log_file="./log/stage1.sh.log"
+    log_file="./log/time.log"
     exec > >(tee -a $log_file)
     exec 2>&1
 else 

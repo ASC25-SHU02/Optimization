@@ -18,13 +18,13 @@ run_with_timing 'hisat-3n --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa \
     --new-summary \
     -q \
     -U ../process/SRR23538292/SRR23538292.fastq_cut\
-    -p 16 \
+    -p 20 \
     --base-change C,T \
     --mp 8,2 \
     --no-spliced-alignment \
     --directional-mapping \
     | samtools \
-    view -@ 16 \
+    view -@ 20 \
     -e '!flag.unmap' \
     -O BAM \
     -U ../process/SRR23538292/SRR23538292.ncrna.unmapped.bam \
@@ -32,13 +32,13 @@ run_with_timing 'hisat-3n --index ../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa \
 
 
 run_with_timing 'samtools fastq \
-	-@ 16 \
+	-@ 20 \
 	-O ../process/SRR23538292/SRR23538292.ncrna.unmapped.bam \
 	> ../process/SRR23538292/SRR23538292.mRNA.fastq'
 
 run_with_timing 'hisat-3n \
 	--index ../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa \
-	-p 16 \
+	-p 20 \
 	--summary-file ../process/SRR23538292/map2genome.output.summary \
 	--new-summary \
 	-q \
@@ -48,14 +48,14 @@ run_with_timing 'hisat-3n \
 	--pen-noncansplice 20 \
 	--mp 4,1 \
 	| samtools view \
-	-@ 16 \
+	-@ 20 \
 	-e '!flag.unmap'\
        	-O BAM \
 	-U ../process/SRR23538292/SRR23538292.mRNA.genome.unmapped.bam \
 	-o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.bam'
 
 
-run_with_timing 'samtools sort -@ 16 \
+run_with_timing 'samtools sort -@ 20 \
 	--write-index \
 	-O BAM \
 	-o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.bam \
@@ -72,18 +72,18 @@ run_with_timing 'samtools view \
 run_with_timing 'java -server -Xms8G -Xmx40G -Xss100M \
 	-Djava.io.tmpdir=../process/SRR23538292 \
 	-jar ../UMICollapse/umicollapse.jar bam \
-	-t 2 -T 16 --data naive --merge avgqual --two-pass \
+	-t 2 -T 20 --data naive --merge avgqual --two-pass \
 	-i ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.bam \
 	-o ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam \
 	> ../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.log'
 
 
 run_with_timing 'samtools index \
-	-@ 8 \
+	-@ 20 \
 	../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam \
 	../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam.bai'
 
-run_with_timing 'samtools view -@ 8 \
+run_with_timing 'samtools view -@ 20 \
 	-e "[XM] * 20 <= (qlen-sclen) && [Zf] <= 3 && 3 * [Zf] <= [Zf] + [Yf]" \
 	../process/SRR23538292/SRR23538292.mRNA.genome.mapped.sorted.dedup.bam \
 	-O BAM \
