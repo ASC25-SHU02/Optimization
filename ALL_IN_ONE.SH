@@ -20,6 +20,14 @@ function check_files {
 
 check_files
 
+
+function clear_files {
+    for sample in SRR23538290 SRR23538291 SRR23538292; do
+        find ../process/${sample} -type f -not -name ${sample}.fastq -delete
+    done
+}
+
+clear_files
 echo "
 *********************************************************
 **********************STAGE1*****************************
@@ -56,9 +64,9 @@ else
 fi
 
 time {
-    bash script/stage1_SRR23538290.sh
-    bash script/stage1_SRR23538291.sh
-    bash script/stage1_SRR23538292.sh
+    for sample in SRR23538290 SRR23538291 SRR23538292; do
+        bash script/stage1_${sample}.sh
+    done
 
     echo "@@@@@@@@@@@@@@@TIME SPENDT IN STAGE1@@@@@@@@@@@@@@@@"
 }
