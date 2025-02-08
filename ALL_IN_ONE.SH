@@ -48,7 +48,7 @@ check_tools() {
 
 check_tools
 
-read -p "Do you want to enable timing for each step with tiny overhead? (yes/no): " enable_timing
+enable_timing="yes"
 export enable_timing
 
 if [ "$enable_timing" == "yes" ]; then
@@ -84,7 +84,7 @@ time {
     echo "@@@@@@@@@@@@@@@TIME SPENDT IN STAGE2@@@@@@@@@@@@@@@@"
 }
 
-read -p "You wanna check your answer?(yes/no): " answer
+answer="yes"
 if [[ "$answer" == "yes" ]]; then
     cd check
     bash ./check.sh
