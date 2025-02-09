@@ -1,5 +1,5 @@
 #!/bin/bash
-
+enable_timing="yes"
 run_with_timing() {
 	local cmd="$@"
     echo "Starting: $cmd"
