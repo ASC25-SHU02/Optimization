@@ -67,7 +67,6 @@ time {
     for sample in SRR23538290 SRR23538291 SRR23538292; do
         bash script/stage1_${sample}.sh
     done
-    bash script/parallel.sh
 
     echo "@@@@@@@@@@@@@@@TIME SPENDT IN STAGE1@@@@@@@@@@@@@@@@"
 }
