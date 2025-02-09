@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./script/func.sh
 
 run_with_timing 'samtools view -e "rlen<100000" \
@@ -124,4 +125,4 @@ run_with_timing 'python bin/join_pileup.py \
 	../process/SRR23538292/SRR23538292_filtered_multi.tsv \
 	-o ../process/SRR23538292/SRR23538292_genome.arrow &
 
-wait
+wait'
