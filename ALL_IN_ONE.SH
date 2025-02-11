@@ -25,6 +25,8 @@ function clear_files {
     for sample in SRR23538290 SRR23538291 SRR23538292; do
         find ../process/${sample} -type f -not -name ${sample}.fastq -delete
     done
+    rm -rf ../process/WT
+    mkdir WT
 }
 
 clear_files
