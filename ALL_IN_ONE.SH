@@ -7,8 +7,8 @@ YOU ARE RUNNING THE SCRIPTS FROM TEAM ASCeleration, developed by Shuhuai Li
 "
 # check the files before cutseq.
 function check_files { 
-    refFile="../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa"
-    ncrnaRefFile="../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa"
+    refFile="Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai"
+    ncrnaRefFile="../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa.fai"
 
     if [ ! -f "$refFile" ] || [ ! -f "$ncrnaRefFile" ]; then
         echo "It seems that the script \`script/pre.sh\` hasn't been run. MAKE SURE YOU ARE NOT UNDER ULTIMATE TEST!"
