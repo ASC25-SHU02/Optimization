@@ -5,6 +5,8 @@ YOU ARE RUNNING THE SCRIPTS FROM TEAM ASCeleration, developed by Shuhuai Li
 ============================================================================
 
 "
+# create the log folder
+mkdir log
 # check the files before cutseq.
 function check_files { 
     refFile="../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai"
