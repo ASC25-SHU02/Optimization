@@ -17,7 +17,7 @@ if [[ -n "$RUN_MODE" ]]; then
     elif [ "$RUN_MODE" = "AUTORUN" ]; then
         echo "Running the whole process..."
     elif [ "$RUN_MODE" = "PREPROCESS_ONLY" ]; then
-        echo "Running the preprocess script only..."
+        echo "Running the pre-process script only..."
     else
         echo -e "\033[1;31mERROR:\033[0m Invaild RUN_MODE"
         echo
@@ -26,7 +26,7 @@ if [[ -n "$RUN_MODE" ]]; then
         MANUAL           The DEFAULT option, will NOT do anything when starting the container or script.
         RERUN            \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
         PREPROCESS_ONLY  Will only run the pre-process script.
-        AUTORUN          Will run the full steps including prebuild and the ultimate test.
+        AUTORUN          Will run the full steps including pre-process and the ultimate test.
         "
         exit 1
     fi
@@ -38,7 +38,7 @@ else
     MANUAL           The DEFAULT option, will NOT do anything when starting the container or script.
     RERUN            \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
     PREPROCESS_ONLY  Will only run the pre-process script.
-    AUTORUN          Will run the full steps including prebuild and the ultimate test.
+    AUTORUN          Will run the full steps including pre-process and the ultimate test.
     "
 fi
 
@@ -83,7 +83,7 @@ function check_files {
 	    echo "Pre-process finished"
 	    exit 0
 	fi
-    elif [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
+    elif [ "$RUN_MODE" = "PREPROCESS_ONLY" ]; then
 	    exit 0
     else
         echo "Files exist. Directly run the file. You may on test mode"
