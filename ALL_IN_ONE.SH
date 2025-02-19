@@ -36,7 +36,7 @@ echo "
 *********************************************************
 **********************STAGE1*****************************
 *********************************************************
-
+!!!!!!!!!!!!!!!!!!!cutseq begin!!!!!!!!!!!!!!!!!!!!!!!!!!
 "
 
 check_tools() {
@@ -68,6 +68,7 @@ else
 fi
 
 time {
+time {
     for sample in SRR23538290 SRR23538291 SRR23538292; do
         bash script/stage1_${sample}.sh
     done
@@ -85,7 +86,8 @@ time {
     bash script/stage2.sh
     echo "@@@@@@@@@@@@@@@TIME SPENDT IN STAGE2@@@@@@@@@@@@@@@@"
 }
-
+echo "!!!!!!!!!!!!!!!!!!!Workflow End!!!!!!!!!!!!!!!!!!!!!!!!!!"
+}
 answer="yes"
 if [[ "$answer" == "yes" ]]; then
     cd check
