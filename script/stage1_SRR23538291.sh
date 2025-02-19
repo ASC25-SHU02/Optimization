@@ -71,7 +71,7 @@ run_with_timing 'samtools view \
 
 run_with_timing 'java -server -Xms8G -Xmx40G -Xss100M \
 	-Djava.io.tmpdir=../process/SRR23538291 \
-	-jar ../UMICollapse/umicollapse.jar bam \
+	-jar /Tools/UMICollapse/umicollapse.jar bam \
 	-t 2 -T 20 --data naive --merge avgqual --two-pass \
 	-i ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.bam \
 	-o ../process/SRR23538291/SRR23538291.mRNA.genome.mapped.sorted.dedup.bam \
