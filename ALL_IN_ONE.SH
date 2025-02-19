@@ -15,9 +15,9 @@ if [[ -n "$RUN_MODE" ]]; then
         rm -rf /asc25/process/WT/
         rm -rf /asc25/process/SRR2353829*/*.bam /asc25/process/SRR2353829*/*.tsv /asc25/process/SRR2353829*/*.log /asc25/process/SRR2353829*/*.arrow /asc25/process/SRR2353829*/*.csi /asc25/process/SRR2353829*/*.bai /asc25/process/SRR2353829*/*.summary /asc25/process/SRR2353829*/*.mRNA.fastq /asc25/process/SRR2353829*/*.fastq_*
     elif [ "$RUN_MODE" = "AUTORUN" ]; then
-        echo "Running the prebuild process..."
+        echo "Running the whole process..."
     elif [ "$RUN_MODE" = "PREPROCESS_ONLY" ]; then
-        echo "Running the prebuild process only..."
+        echo "Running the preprocess script only..."
     else
         echo -e "\033[1;31mERROR:\033[0m Invaild RUN_MODE"
         echo
