@@ -28,7 +28,7 @@ function clear_files {
         find ../process/${sample} -type f -not -name ${sample}.fastq -delete
     done
     rm -rf ../process/WT
-    mkdir WT
+    mkdir ../process/WT
 }
 
 clear_files
@@ -81,7 +81,6 @@ echo "
 *********************************************************
 
 "
-
 time {
     bash script/stage2.sh
     echo "@@@@@@@@@@@@@@@TIME SPENDT IN STAGE2@@@@@@@@@@@@@@@@"
