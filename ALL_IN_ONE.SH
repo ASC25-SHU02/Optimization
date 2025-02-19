@@ -164,5 +164,5 @@ echo "!!!!!!!!!!!!!!!!!!!Workflow End!!!!!!!!!!!!!!!!!!!!!!!!!!"
 answer="yes"
 if [[ "$answer" == "yes" ]]; then
     cd /asc25/Optimization/check
-    bash /asc25/Optimization/check.sh
+    bash /asc25/Optimization/check/check.sh
 fi
