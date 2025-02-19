@@ -2,9 +2,11 @@
 echo ""
 
 function clear_files() {
-	rm correlation.tsv  detected.tsv
+	if [ -f "$1" ]; then  
+  		rm "$1"  
 }
-clear_files
+clear_files correlation.tsv
+clear_files detected.tsv
 
 python utils/get_intersection.py
 
