@@ -61,10 +61,11 @@ done
 if [ ${#missing_files[@]} -eq 0 ]; then
     echo "All datasets exist"
 else
-    echo "The following dataset do not exist:"
+    echo "The following dataset do NOT exist:"
     for file in "${missing_files[@]}"; do
         echo "$file"
     done
+    echo "Make sure you have mounted all the datasets correctly."
 fi
 
 # create the log folder
