@@ -41,6 +41,32 @@ else
     "
 fi
 
+# check dataset
+files=(
+    "../process/SRR23538290/SRR23538290.fastq"
+    "../process/SRR23538291/SRR23538291.fastq"
+    "../process/SRR23538292/SRR23538292.fastq"
+    "../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa"
+    "../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa"
+)
+
+missing_files=()
+
+for file in "${files[@]}"; do
+    if ! [ -e "$file" ]; then
+        missing_files+=("$file")
+    fi
+done
+
+if [ ${#missing_files[@]} -eq 0 ]; then
+    echo "All datasets exist"
+else
+    echo "The following dataset do not exist:"
+    for file in "${missing_files[@]}"; do
+        echo "$file"
+    done
+fi
+
 # create the log folder
 mkdir -p log
 # check the files before cutseq.
