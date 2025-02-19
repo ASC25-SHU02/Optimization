@@ -11,8 +11,8 @@ if [[ -n "$RUN_MODE" ]]; then
         exit 0
     elif [ "$RUN_MODE" = "RERUN" ]; then
         echo "Deleting all the generated files..."
-        rm -rf ../process/WT/
-        rm -rf ../process/SRR2353829*/*.bam ../process/SRR2353829*/*.tsv ../process/SRR2353829*/*.log ../process/SRR2353829*/*.arrow ../process/SRR2353829*/*.csi ../process/SRR2353829*/*.bai ../process/SRR2353829*/*.summary ../process/SRR2353829*/*.mRNA.fastq ../process/SRR2353829*/*.fastq_*
+        rm -rf /asc25/process/WT/
+        rm -rf /asc25/process/SRR2353829*/*.bam /asc25/process/SRR2353829*/*.tsv /asc25/process/SRR2353829*/*.log /asc25/process/SRR2353829*/*.arrow /asc25/process/SRR2353829*/*.csi /asc25/process/SRR2353829*/*.bai /asc25/process/SRR2353829*/*.summary /asc25/process/SRR2353829*/*.mRNA.fastq /asc25/process/SRR2353829*/*.fastq_*
     elif [ "$RUN_MODE" = "AUTORUN" ]; then
         echo "Running the prebuild process..."
     elif [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
@@ -43,11 +43,11 @@ fi
 
 # check dataset
 files=(
-    "../process/SRR23538290/SRR23538290.fastq"
-    "../process/SRR23538291/SRR23538291.fastq"
-    "../process/SRR23538292/SRR23538292.fastq"
-    "../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa"
-    "../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa"
+    "/asc25/process/SRR23538290/SRR23538290.fastq"
+    "/asc25/process/SRR23538291/SRR23538291.fastq"
+    "/asc25/process/SRR23538292/SRR23538292.fastq"
+    "/asc25/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa"
+    "/asc25/ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa"
 )
 
 missing_files=()
@@ -72,12 +72,12 @@ fi
 mkdir -p log
 # check the files before cutseq.
 function check_files { 
-    refFile="../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai"
-    ncrnaRefFile="../ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa.fai"
+    refFile="/asc25/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai"
+    ncrnaRefFile="/asc25/ncrna_ref/Homo_sapiens.GRCh38.ncrna.fa.fai"
 
     if [ ! -f "$refFile" ] || [ ! -f "$ncrnaRefFile" ]; then
-        echo "It seems that the script \`script/pre.sh\` hasn't been run. MAKE SURE YOU ARE NOT UNDER ULTIMATE TEST!"
-        bash script/pre.sh
+        echo "It seems that the script \`/asc25/Optimization/script/pre.sh\` hasn't been run. MAKE SURE YOU ARE NOT UNDER ULTIMATE TEST!"
+        bash /asc25/Optimization/script/pre.sh
 	if [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
 	    exit 0
 	fi
@@ -93,12 +93,12 @@ check_files
 
 function clear_files {
     for sample in SRR23538290 SRR23538291 SRR23538292; do
-        find ../process/${sample} -type f -not -name ${sample}.fastq -delete
+        find /asc25/process/${sample} -type f -not -name ${sample}.fastq -delete
     done
-    if [[ -d "../process/WT" ]]; then
-        rm -rf ../process/WT
+    if [[ -d "/asc25/process/WT" ]]; then
+        rm -rf /asc25/process/WT
     else
-        mkdir -p ../process/WT
+        mkdir -p /asc25/process/WT
     fi
 }
 
@@ -127,13 +127,13 @@ enable_timing="yes"
 export enable_timing
 
 if [ "$enable_timing" == "yes" ]; then
-	echo "Timing enabled. See logs in ./log/time.log"
-    log_file="./log/time.log"
+	echo "Timing enabled. See logs in /asc25/Optimization/log/time.log"
+    log_file="/asc25/Optimization/log/time.log"
     exec > >(tee -a $log_file)
     exec 2>&1
 else 
-	echo "Timing disabled. See logs in ./log/plain.log"
-    log_file="./log/plain.log"
+	echo "Timing disabled. See logs in /asc25/Optimization/log/plain.log"
+    log_file="/asc25/Optimization/log/plain.log"
     exec > >(tee -a $log_file)
     exec 2>&1
 fi
@@ -141,7 +141,7 @@ fi
 time {
 time {
     for sample in SRR23538290 SRR23538291 SRR23538292; do
-        bash script/stage1_${sample}.sh
+        bash /asc25/Optimization/script/stage1_${sample}.sh
     done
 
     echo "@@@@@@@@@@@@@@@TIME SPENDT IN STAGE1@@@@@@@@@@@@@@@@"
@@ -154,13 +154,13 @@ echo "
 
 "
 time {
-    bash script/stage2.sh
+    bash /asc25/Optimization/script/stage2.sh
     echo "@@@@@@@@@@@@@@@TIME SPENDT IN STAGE2@@@@@@@@@@@@@@@@"
 }
 echo "!!!!!!!!!!!!!!!!!!!Workflow End!!!!!!!!!!!!!!!!!!!!!!!!!!"
 }
 answer="yes"
 if [[ "$answer" == "yes" ]]; then
-    cd check
-    bash ./check.sh
+    cd /asc25/Optimization/check
+    bash /asc25/Optimization/check.sh
 fi
