@@ -3,7 +3,8 @@ echo ""
 
 function clear_files() {
 	if [ -f "$1" ]; then  
-  		rm "$1"  
+  		rm "$1" 
+	fi 
 }
 clear_files correlation.tsv
 clear_files detected.tsv
