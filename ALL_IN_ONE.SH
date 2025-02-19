@@ -8,24 +8,25 @@ YOU ARE RUNNING THE SCRIPTS FROM TEAM ASCeleration, developed by Shuhuai Li
 # check run mode
 if [[ -n "$RUN_MODE" ]]; then
     if [ "$RUN_MODE" = "MANUAL" ]; then
-        exit 0
+        cd /asc25/Optimization
+	bash
     elif [ "$RUN_MODE" = "RERUN" ]; then
         echo "Deleting all the generated files..."
         rm -rf /asc25/process/WT/
         rm -rf /asc25/process/SRR2353829*/*.bam /asc25/process/SRR2353829*/*.tsv /asc25/process/SRR2353829*/*.log /asc25/process/SRR2353829*/*.arrow /asc25/process/SRR2353829*/*.csi /asc25/process/SRR2353829*/*.bai /asc25/process/SRR2353829*/*.summary /asc25/process/SRR2353829*/*.mRNA.fastq /asc25/process/SRR2353829*/*.fastq_*
     elif [ "$RUN_MODE" = "AUTORUN" ]; then
         echo "Running the prebuild process..."
-    elif [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
+    elif [ "$RUN_MODE" = "PREPROCESS_ONLY" ]; then
         echo "Running the prebuild process only..."
     else
         echo -e "\033[1;31mERROR:\033[0m Invaild RUN_MODE"
         echo
 	echo -e \
         "Available options: 
-        MANUAL         The DEFAULT option, will NOT do anything when starting the container or script.
-        RERUN          \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
-        PREBUILD_ONLY  Will only run the prebuild process.
-        AUTORUN        Will run the full steps including prebuild and the ultimate test.
+        MANUAL           The DEFAULT option, will NOT do anything when starting the container or script.
+        RERUN            \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
+        PREPROCESS_ONLY  Will only run the pre-process script.
+        AUTORUN          Will run the full steps including prebuild and the ultimate test.
         "
         exit 1
     fi
@@ -34,10 +35,10 @@ else
     echo
     echo -e \
     "Available options: 
-    MANUAL         The DEFAULT option, will NOT do anything when starting the container or script.
-    RERUN          \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
-    PREBUILD_ONLY  Will only run the prebuild process.
-    AUTORUN        Will run the full steps including prebuild and the ultimate test.
+    MANUAL           The DEFAULT option, will NOT do anything when starting the container or script.
+    RERUN            \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
+    PREPROCESS_ONLY  Will only run the pre-process script.
+    AUTORUN          Will run the full steps including prebuild and the ultimate test.
     "
 fi
 
@@ -78,7 +79,8 @@ function check_files {
     if [ ! -f "$refFile" ] || [ ! -f "$ncrnaRefFile" ]; then
         echo "It seems that the script \`/asc25/Optimization/script/pre.sh\` hasn't been run. MAKE SURE YOU ARE NOT UNDER ULTIMATE TEST!"
         bash /asc25/Optimization/script/pre.sh
-	if [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
+	if [ "$RUN_MODE" = "PREPROCESS_ONLY" ]; then
+	    echo "Pre-process finished"
 	    exit 0
 	fi
     elif [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
