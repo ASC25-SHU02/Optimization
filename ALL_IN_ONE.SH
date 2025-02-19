@@ -13,7 +13,7 @@ if [[ -v RUN_MODE ]]; then
         rm -rf ../process/WT/
         rm -rf ../process/SRR2353829*/*.bam ../process/SRR2353829*/*.tsv ../process/SRR2353829*/*.log ../process/SRR2353829*/*.arrow ../process/SRR2353829*/*.csi ../process/SRR2353829*/*.bai ../process/SRR2353829*/*.summary ../process/SRR2353829*/*.mRNA.fastq ../process/SRR2353829*/*.fastq_*
     elif ["$RUN_MODE" = "AUTORUN"]; then
-    elif ["$RUN_MODE" = "PREBUILD_ONLY]; then
+    elif ["$RUN_MODE" = "PREBUILD_ONLY"]; then
     else
         echo "\033[1;31mERROR:\033[0m Invaild RUN_MODE"
 	echo \
@@ -46,10 +46,10 @@ function check_files {
     if [ ! -f "$refFile" ] || [ ! -f "$ncrnaRefFile" ]; then
         echo "It seems that the script \`script/pre.sh\` hasn't been run. MAKE SURE YOU ARE NOT UNDER ULTIMATE TEST!"
         bash script/pre.sh
-	if ["$RUN_MODE" = "PREBUILD_ONLY]; then
+	if ["$RUN_MODE" = "PREBUILD_ONLY"]; then
 	    exit 0
 	fi
-    elif ["$RUN_MODE" = "PREBUILD_ONLY]; then
+    elif ["$RUN_MODE" = "PREBUILD_ONLY"]; then
 	    exit 0
     else
         echo "Files exist. Directly run the file. You may on test mode"
