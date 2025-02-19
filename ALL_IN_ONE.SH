@@ -18,7 +18,7 @@ if [[ -n "$RUN_MODE" ]]; then
     elif [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
         echo "Running the prebuild process only..."
     else
-        echo "\033[1;31mERROR:\033[0m Invaild RUN_MODE"
+        echo -e "\033[1;31mERROR:\033[0m Invaild RUN_MODE"
         echo
 	echo -e \
         "Available options: 
