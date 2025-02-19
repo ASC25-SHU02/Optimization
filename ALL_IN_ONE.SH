@@ -6,34 +6,39 @@ YOU ARE RUNNING THE SCRIPTS FROM TEAM ASCeleration, developed by Shuhuai Li
 
 "
 # check run mode
-if [[ -v RUN_MODE ]]; then
-    if ["$RUN_MODE" = "MANUAL"]; then
+if [[ -n "$RUN_MODE" ]]; then
+    if [ "$RUN_MODE" = "MANUAL" ]; then
         exit 0
-    elif ["$RUN_MODE" = "RERUN"]; then
+    elif [ "$RUN_MODE" = "RERUN" ]; then
+        echo "Deleting all the generated files..."
         rm -rf ../process/WT/
         rm -rf ../process/SRR2353829*/*.bam ../process/SRR2353829*/*.tsv ../process/SRR2353829*/*.log ../process/SRR2353829*/*.arrow ../process/SRR2353829*/*.csi ../process/SRR2353829*/*.bai ../process/SRR2353829*/*.summary ../process/SRR2353829*/*.mRNA.fastq ../process/SRR2353829*/*.fastq_*
-    elif ["$RUN_MODE" = "AUTORUN"]; then
-    elif ["$RUN_MODE" = "PREBUILD_ONLY"]; then
+    elif [ "$RUN_MODE" = "AUTORUN" ]; then
+        echo "Running the prebuild process..."
+    elif [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
+        echo "Running the prebuild process only..."
     else
         echo "\033[1;31mERROR:\033[0m Invaild RUN_MODE"
-	echo \
-"Available options: 
-MANUAL         The DEFAULT option, will NOT do anything when starting the container or script.
-RERUN          \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
-PREBUILD_ONLY  Will only run the prebuild process.
-AUTORUN        Will run the full steps including prebuild and the ultimate test.
-"
+        echo
+	echo -e \
+        "Available options: 
+        MANUAL         The DEFAULT option, will NOT do anything when starting the container or script.
+        RERUN          \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
+        PREBUILD_ONLY  Will only run the prebuild process.
+        AUTORUN        Will run the full steps including prebuild and the ultimate test.
+        "
         exit 1
     fi
 else
-    echo "\033[1;31mERROR:\033[0m RUN_MODE not defined."
-    echo \
-"Available options: 
-MANUAL         The DEFAULT option, will NOT do anything when starting the container or script.
-RERUN          \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
-PREBUILD_ONLY  Will only run the prebuild process.
-AUTORUN        Will run the full steps including prebuild and the ultimate test.
-"
+    echo -e "\033[1;31mERROR:\033[0m RUN_MODE not defined."
+    echo
+    echo -e \
+    "Available options: 
+    MANUAL         The DEFAULT option, will NOT do anything when starting the container or script.
+    RERUN          \033[1;31m!USE WITH CAUTION!\033[0m Will DELETE ALL OF the generated files.
+    PREBUILD_ONLY  Will only run the prebuild process.
+    AUTORUN        Will run the full steps including prebuild and the ultimate test.
+    "
 fi
 
 # create the log folder
@@ -46,10 +51,10 @@ function check_files {
     if [ ! -f "$refFile" ] || [ ! -f "$ncrnaRefFile" ]; then
         echo "It seems that the script \`script/pre.sh\` hasn't been run. MAKE SURE YOU ARE NOT UNDER ULTIMATE TEST!"
         bash script/pre.sh
-	if ["$RUN_MODE" = "PREBUILD_ONLY"]; then
+	if [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
 	    exit 0
 	fi
-    elif ["$RUN_MODE" = "PREBUILD_ONLY"]; then
+    elif [ "$RUN_MODE" = "PREBUILD_ONLY" ]; then
 	    exit 0
     else
         echo "Files exist. Directly run the file. You may on test mode"
