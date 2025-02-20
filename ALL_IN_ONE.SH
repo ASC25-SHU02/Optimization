@@ -3,11 +3,11 @@ echo \
 "============================================================================
 YOU ARE RUNNING THE SCRIPTS FROM TEAM ASCeleration, developed by Shuhuai Li
 ============================================================================
-
 "
 # check run mode
 if [[ -n "$RUN_MODE" ]]; then
     if [ "$RUN_MODE" = "MANUAL" ]; then
+	echo "Running in MANUAL mode..."
         cd /asc25/Optimization
 	bash
 	exit 0
