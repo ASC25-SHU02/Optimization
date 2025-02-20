@@ -10,6 +10,7 @@ if [[ -n "$RUN_MODE" ]]; then
     if [ "$RUN_MODE" = "MANUAL" ]; then
         cd /asc25/Optimization
 	bash
+	exit 0
     elif [ "$RUN_MODE" = "RERUN" ]; then
         echo "Deleting all the generated files..."
         rm -rf /asc25/process/WT/
